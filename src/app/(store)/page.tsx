@@ -68,7 +68,7 @@ export default async function HomePage() {
               Luxury in each detail
             </span>
           </h1>
-          <div className="hero-rise mt-9 flex flex-wrap justify-center gap-3" style={{ "--d": "0.45s" } as React.CSSProperties}>
+          <div className="hero-rise mt-9 flex w-full max-w-xs flex-col gap-3 sm:w-auto sm:max-w-none sm:flex-row sm:justify-center" style={{ "--d": "0.45s" } as React.CSSProperties}>
             <Link href="/shop" className="btn bg-white text-ink hover:bg-rose hover:text-white">
               Shop the collection
             </Link>
@@ -92,9 +92,10 @@ export default async function HomePage() {
 
       {/* Collections */}
       <section className="mx-auto max-w-[1440px] px-5 md:px-10">
-        <div className="grid gap-x-5 gap-y-12 md:grid-cols-3">
+        {/* Phones: a swipeable row; desktop: three columns. */}
+        <div className="-mx-5 flex snap-x snap-mandatory scroll-px-5 gap-4 overflow-x-auto px-5 pb-2 no-scrollbar md:mx-0 md:grid md:grid-cols-3 md:gap-5 md:overflow-visible md:px-0 md:pb-0">
           {collections.map((c, i) => (
-            <Reveal key={c.slug} delay={i * 0.08}>
+            <Reveal key={c.slug} delay={i * 0.08} className="w-[78vw] shrink-0 snap-start md:w-auto">
               <Link href={`/collections/${c.slug}`} className="group block">
                 <div className="relative aspect-[3/4] overflow-hidden bg-paper-light">
                   {c.image_url && (
@@ -109,7 +110,7 @@ export default async function HomePage() {
                 </div>
                 <div className="mt-5 flex items-end justify-between gap-4">
                   <div>
-                    <h3 className="font-serif text-2xl">{c.name}</h3>
+                    <h3 className="font-serif text-xl md:text-2xl">{c.name}</h3>
                     {c.tagline && <p className="mt-1 text-[13px] text-muted">{c.tagline}</p>}
                   </div>
                   <span className="link-arrow shrink-0 pb-1 group-hover:gap-5 group-hover:text-rose">Shop {arrow}</span>

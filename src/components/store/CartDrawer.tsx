@@ -86,8 +86,8 @@ export function CartDrawer({ freeShippingThreshold }: { freeShippingThreshold: n
                         <>You&apos;ve unlocked <strong className="font-semibold">free delivery</strong></>
                       )}
                     </p>
-                    <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-ink/10" role="progressbar" aria-valuenow={Math.round(progress)} aria-valuemin={0} aria-valuemax={100}>
-                      <motion.div className="h-full rounded-full bg-rose" initial={false} animate={{ width: `${progress}%` }} transition={{ duration: 0.7, ease }} />
+                    <div className="mt-2 h-1 overflow-hidden bg-ink/10" role="progressbar" aria-valuenow={Math.round(progress)} aria-valuemin={0} aria-valuemax={100}>
+                      <motion.div className="h-full bg-rose" initial={false} animate={{ width: `${progress}%` }} transition={{ duration: 0.7, ease }} />
                     </div>
                   </div>
                 </div>
@@ -104,7 +104,7 @@ export function CartDrawer({ freeShippingThreshold }: { freeShippingThreshold: n
                         exit={{ opacity: 0, height: 0, transition: { duration: 0.3 } }}
                         className="flex gap-4 py-5"
                       >
-                        <Link href={`/product/${line.slug}`} onClick={close} className="relative size-20 shrink-0 overflow-hidden rounded-xl bg-paper-light sm:size-24">
+                        <Link href={`/product/${line.slug}`} onClick={close} className="relative aspect-[3/4] w-20 shrink-0 overflow-hidden bg-paper-light sm:w-24">
                           {line.image ? (
                             <Image src={line.image} alt={line.name} fill sizes="96px" className="object-cover" />
                           ) : (
@@ -128,13 +128,13 @@ export function CartDrawer({ freeShippingThreshold }: { freeShippingThreshold: n
                             </button>
                           </div>
                           <div className="mt-auto flex items-center justify-between pt-3">
-                            <div className="flex items-center rounded-full border border-ink/20">
-                              <button className="grid size-8 place-items-center rounded-full hover:bg-ink/5" aria-label="Decrease" onClick={() => setQuantity(line.variantId, line.quantity - 1)}>
+                            <div className="flex items-center border border-line bg-white">
+                              <button className="grid size-8 place-items-center hover:bg-ink/5" aria-label="Decrease" onClick={() => setQuantity(line.variantId, line.quantity - 1)}>
                                 <Minus className="size-3" />
                               </button>
                               <span className="w-6 text-center text-xs tabular-nums">{line.quantity}</span>
                               <button
-                                className="grid size-8 place-items-center rounded-full hover:bg-ink/5 disabled:opacity-30"
+                                className="grid size-8 place-items-center hover:bg-ink/5 disabled:opacity-30"
                                 aria-label="Increase"
                                 disabled={line.quantity >= line.maxStock}
                                 onClick={() => setQuantity(line.variantId, line.quantity + 1)}

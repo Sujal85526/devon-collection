@@ -3,43 +3,48 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
-import { Menu, UserRound, X } from "lucide-react";
+import { UserRound, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { BRAND } from "@/lib/brand";
 import { cartCount, useCart } from "@/lib/cart";
 import { useHydrated } from "@/lib/use-hydrated";
 import { cn } from "@/lib/utils";
 import { BagIcon } from "./BagIcon";
+import { InstagramIcon } from "./InstagramIcon";
 import { Logo } from "./Logo";
 
-const NAV = [
+const FEATURED = [
   { href: "/shop", label: "Shop all" },
   { href: "/collections/signature-black", label: "Signature Black" },
-  { href: "/collections/satin", label: "Satin" },
+  { href: "/collections/satin", label: "Satin Open Abayas" },
   { href: "/collections/occasion", label: "Occasion" },
 ];
-const NAV_RIGHT = [
+const HELP = [
   { href: "/about", label: "Our story" },
-  { href: "/track", label: "Track order" },
+  { href: "/about#sizing", label: "Size guide" },
+  { href: "/about#delivery", label: "Delivery & returns" },
+  { href: "/track", label: "Track your order" },
+  { href: "/account", label: "My account" },
 ];
 
-const ANNOUNCEMENTS = ["Free delivery across the UAE over AED 500", "Abaya home service — try before you buy", "Licensed by the DED, Abu Dhabi"];
-
-const isActive = (pathname: string, href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
-
-/** Black announcement bar over an ivory header. Floats transparent over photo heroes (globals.css "Store header"). */
+/**
+ * Fixed bar: text links left, wordmark centre, icons and a pill menu button right. Transparent with
+ * white type over a photo hero ([data-hero]) until the page scrolls, a solid white bar elsewhere.
+ */
 export function Header() {
   const pathname = usePathname();
   const lines = useCart((s) => s.lines);
   const openCart = useCart((s) => s.open);
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const mounted = useHydrated();
+  const [open, setOpen] = useState(false);
   const [lastPath, setLastPath] = useState(pathname);
+  const mounted = useHydrated();
   const count = mounted ? cartCount(lines) : 0;
+  const home = pathname === "/";
+  const clear = home && !scrolled && !open;
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -48,113 +53,154 @@ export function Header() {
   // Close the menu after navigating.
   if (lastPath !== pathname) {
     setLastPath(pathname);
-    setMenuOpen(false);
+    setOpen(false);
   }
 
-  // Lock page scroll behind the full-screen mobile menu.
   useEffect(() => {
-    document.documentElement.style.overflow = menuOpen ? "hidden" : "";
-  }, [menuOpen]);
+    document.documentElement.style.overflow = open ? "hidden" : "";
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
 
-  const linkClass = (href: string) =>
-    cn(
-      "group relative py-2 text-[10.5px] font-medium uppercase tracking-[0.24em] transition-colors hover:text-rose",
-      isActive(pathname, href) && "text-rose",
-    );
+  const link = "hidden transition-opacity hover:opacity-60 lg:block";
 
   return (
-    <header data-scrolled={scrolled || undefined} data-open={menuOpen || undefined} className="site-header inset-x-0 top-0 z-40">
-      <div className="overflow-hidden bg-ink text-paper">
-        <div className="hidden h-8 items-center justify-center gap-10 text-[10px] uppercase tracking-[0.26em] md:flex">
-          {ANNOUNCEMENTS.map((a, i) => (
-            <span key={a} className="flex items-center gap-10">
-              {i > 0 && <span className="size-1 rounded-full bg-rose" />}
-              {a}
-            </span>
-          ))}
-        </div>
-        <div className="flex h-8 w-max items-center text-[10px] uppercase tracking-[0.24em] md:hidden">
-          <div className="marquee flex shrink-0 items-center">
-            {[...ANNOUNCEMENTS, ...ANNOUNCEMENTS].map((a, i) => (
-              <span key={i} className="flex items-center gap-6 pr-6">
-                <span className="size-1 rounded-full bg-rose" />
-                {a}
+    <>
+      <header className={cn("fixed inset-x-0 top-0 z-50 transition-colors duration-300", clear ? "bg-transparent text-white" : "bg-paper text-ink")}>
+        <nav className="relative flex h-14 items-center justify-between px-3 text-[13px] sm:px-5">
+          <div className="flex flex-1 items-center gap-7">
+            <button
+              type="button"
+              aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
+              onClick={() => setOpen((v) => !v)}
+              className={cn(
+                "flex h-8 items-center gap-2 rounded-full pl-1 pr-3.5 text-xs transition-colors lg:hidden",
+                clear ? "bg-white/20 backdrop-blur-md" : "bg-paper-light",
+              )}
+            >
+              <span className={cn("grid size-6 place-items-center rounded-full", clear ? "bg-white/25" : "bg-paper-deep")}>
+                {open ? <X className="size-3.5" strokeWidth={1.75} /> : <MenuGlyph />}
               </span>
+              Menu
+            </button>
+            <Link href="/shop" className={link}>Shop all</Link>
+            {FEATURED.slice(1).map((l) => (
+              <Link key={l.href} href={l.href} className={link}>
+                {l.label}
+              </Link>
             ))}
           </div>
-        </div>
-      </div>
 
-      <div className="mx-auto grid h-16 max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center px-5 md:h-[76px] md:px-10">
-        <div className="flex items-center">
-          <button className="-ml-2.5 p-2.5 lg:hidden" aria-label={menuOpen ? "Close menu" : "Open menu"} onClick={() => setMenuOpen((v) => !v)}>
-            {menuOpen ? <X className="size-5" strokeWidth={1.4} /> : <Menu className="size-5" strokeWidth={1.4} />}
-          </button>
-          <nav className="hidden items-center gap-8 lg:flex">
-            {NAV.map((item) => (
-              <Link key={item.href} href={item.href} className={linkClass(item.href)}>
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-        </div>
+          <Logo light={clear} className="absolute left-1/2 h-5 -translate-x-1/2 sm:h-6" />
 
-        <Logo className="h-7 md:h-9" />
-
-        <div className="-mr-2.5 flex items-center justify-end gap-1 md:mr-0 md:gap-7">
-          <nav className="hidden items-center gap-8 lg:flex">
-            {NAV_RIGHT.map((item) => (
-              <Link key={item.href} href={item.href} className={linkClass(item.href)}>
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-          <Link href="/account" aria-label="Account" className="p-2.5 transition-colors hover:text-rose md:p-1">
-            <UserRound className="size-[1.15rem]" strokeWidth={1.3} />
-          </Link>
-          <button aria-label="Open bag" onClick={openCart} className="relative p-2.5 transition-colors hover:text-rose md:p-1">
-            <BagIcon className="size-[1.3rem]" />
-            <AnimatePresence>
-              {count > 0 && (
-                <motion.span
-                  key={count}
-                  initial={{ scale: 0.4, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0.4, opacity: 0 }}
-                  className="absolute right-0.5 top-1 grid size-4 place-items-center rounded-full bg-rose text-[9px] font-semibold text-white md:-right-1.5 md:-top-1"
-                >
-                  {count}
-                </motion.span>
+          <div className="flex flex-1 items-center justify-end gap-0.5 sm:gap-1.5">
+            <Link href="/about" className={cn(link, "mr-4")}>Our story</Link>
+            <Link href="/track" className={cn(link, "mr-3")}>Track order</Link>
+            <Link href="/account" aria-label="Account" className="p-2 transition-opacity hover:opacity-60">
+              <UserRound className="size-[19px]" strokeWidth={1.4} />
+            </Link>
+            <button type="button" aria-label="Open bag" onClick={openCart} className="relative p-2 transition-opacity hover:opacity-60">
+              <BagIcon className="size-5" />
+              <AnimatePresence>
+                {count > 0 && (
+                  <motion.span
+                    key={count}
+                    initial={{ scale: 0.4, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.4, opacity: 0 }}
+                    className="absolute right-0 top-0 grid min-w-4 place-items-center rounded-full bg-rose px-1 text-[10px] font-medium leading-4 tabular-nums text-white"
+                  >
+                    {count}
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </button>
+            <button
+              type="button"
+              aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
+              onClick={() => setOpen((v) => !v)}
+              className={cn(
+                "ml-2 hidden h-[26px] w-[42px] place-items-center rounded-full transition-colors lg:grid",
+                clear ? "bg-white/90 text-ink" : "bg-paper-light hover:bg-paper-deep",
               )}
-            </AnimatePresence>
-          </button>
-        </div>
-      </div>
+            >
+              {open ? <X className="size-4" strokeWidth={1.5} /> : <MenuGlyph wide />}
+            </button>
+          </div>
+        </nav>
+
+        {/* The page's rounded top corners, tucked under the solid bar. */}
+        {!clear && (
+          <div aria-hidden className="pointer-events-none absolute inset-x-0 top-full flex justify-between">
+            <span className="size-4 bg-[radial-gradient(circle_at_100%_100%,transparent_15.5px,var(--color-paper)_16px)]" />
+            <span className="size-4 bg-[radial-gradient(circle_at_0_100%,transparent_15.5px,var(--color-paper)_16px)]" />
+          </div>
+        )}
+      </header>
 
       <AnimatePresence>
-        {menuOpen && (
-          <motion.nav
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            className="flex h-[calc(100svh-6rem)] flex-col overflow-y-auto border-t border-line bg-paper px-6 pb-8 pt-4 text-ink lg:hidden"
-          >
-            {[...NAV, ...NAV_RIGHT, { href: "/account", label: "My account" }].map((item, i) => (
-              <motion.div key={item.href} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.04 * i }}>
-                <Link
-                  href={item.href}
-                  className={cn("block border-b border-line py-4 font-serif text-2xl", isActive(pathname, item.href) && "italic text-rose")}
-                >
-                  {item.label}
-                </Link>
-              </motion.div>
-            ))}
-            <a href={BRAND.instagram} target="_blank" rel="noopener noreferrer" className="eyebrow mt-auto pt-8 text-muted">
-              {BRAND.instagramHandle}
-            </a>
-          </motion.nav>
+        {open && (
+          <>
+            <motion.div
+              key="scrim"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-40 bg-ink/30"
+              onClick={() => setOpen(false)}
+            />
+            <motion.div
+              key="sheet"
+              initial={{ opacity: 0, y: -16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              className="fixed inset-x-0 top-14 z-40 max-h-[calc(100dvh-3.5rem)] overflow-y-auto bg-paper px-2 pb-2"
+            >
+              <div className="grid gap-8 rounded-2xl bg-paper-light p-6 lg:grid-cols-[1.2fr_1.4fr_1fr] lg:p-8">
+                <ul className="space-y-2">
+                  {FEATURED.map((l) => (
+                    <li key={l.href}>
+                      <Link href={l.href} className="text-xl font-medium tracking-[-0.035em] transition-colors hover:text-rose lg:text-2xl">
+                        {l.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                <div>
+                  <p className="text-[13px] font-semibold">Help</p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {HELP.map((l) => (
+                      <Link key={l.href} href={l.href} className="rounded-full bg-paper px-3 py-1.5 text-xs transition-colors hover:bg-ink hover:text-paper">
+                        {l.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+                <div className="text-[13px] text-ink/70">
+                  <p className="font-semibold text-ink">Free delivery over AED 500</p>
+                  <p className="mt-2 leading-relaxed">Abaya home service across the UAE. Licensed by the DED, Abu Dhabi.</p>
+                  <a href={BRAND.instagram} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-2 transition-colors hover:text-rose">
+                    <InstagramIcon className="size-4" /> {BRAND.instagramHandle}
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
-    </header>
+    </>
+  );
+}
+
+function MenuGlyph({ wide }: { wide?: boolean }) {
+  return (
+    <span className={cn("flex flex-col gap-[3px]", wide ? "w-4" : "w-3")}>
+      <span className="h-px w-full bg-current" />
+      <span className="h-px w-full bg-current" />
+    </span>
   );
 }

@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
-/* Devon Collection — black, warm ivory and the signature fuchsia from the packaging ribbon. */
+/* Devon Collection — black, white and the signature fuchsia from the packaging ribbon. */
 @theme {
   --color-ink: #111010;
   --color-ink-deep: #000000;
-  --color-paper: #faf7f4; /* raised panels */
-  --color-paper-light: #f3eee9; /* the page itself */
-  --color-paper-deep: #e9e1d8;
+  --color-paper: #ffffff; /* raised panels */
+  --color-paper-light: #f1f1f0; /* the page itself */
+  --color-paper-deep: #e4e4e2;
   --color-rose: #de097f;
   --color-rose-deep: #a8075f;
   --color-blush: #f9e3ef;
   --color-sage: #9bb36a;
   --color-alert: #e07a4f;
   --color-muted: #77706b;
-  --color-line: #e6dfd8;
+  --color-line: #e4e4e2;
 
   --font-sans: var(--font-instrument-sans), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-instrument-sans), ui-sans-serif, system-ui, sans-serif;
@@ -52,7 +52,7 @@
   .font-script em, .font-script .italic { color: var(--color-rose); }
 }
 
-/* Raised ivory panel on the cream page. */
+/* Raised white panel on the light grey page. */
 @utility panel {
   @apply bg-paper rounded-[1.25rem];
 }
@@ -118,3 +118,6 @@ select:not([multiple]) {
   background-repeat: no-repeat;
   background-position: right 0.9rem center;
 }
+
+/* The header is fixed: pages without a photo hero start below it. */
+body:not(:has([data-hero])) main { padding-top: 3.5rem; }

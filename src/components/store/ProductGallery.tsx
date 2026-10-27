@@ -24,7 +24,7 @@ export function ProductGallery({ images, name }: { images: string[]; name: strin
               onClick={() => setActive(i)}
               aria-label={`Show image ${i + 1}`}
               className={cn(
-                "relative aspect-[3/4] w-16 shrink-0 overflow-hidden transition-opacity md:w-full",
+                "relative aspect-[3/4] w-16 shrink-0 overflow-hidden rounded-lg transition-opacity md:w-full",
                 i === active ? "opacity-100 ring-1 ring-ink" : "opacity-55 hover:opacity-100",
               )}
             >
@@ -33,7 +33,7 @@ export function ProductGallery({ images, name }: { images: string[]; name: strin
           ))}
         </div>
       )}
-      <div className="relative aspect-[3/4] flex-1 overflow-hidden bg-paper-light">
+      <div className="relative aspect-[3/4] flex-1 overflow-hidden rounded-[10px] bg-paper-deep">
         <AnimatePresence initial={false}>
           <motion.div
             key={active}

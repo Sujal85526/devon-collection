@@ -59,8 +59,8 @@ export function ProductPurchase({ product }: { product: ProductWithRelations }) 
                   setVariantId(undefined);
                 }}
                 className={cn(
-                  "border px-4 py-2.5 text-xs transition-colors",
-                  c === color ? "border-ink bg-ink text-paper" : "border-line bg-white hover:border-ink",
+                  "rounded-full border px-4 py-2.5 text-xs transition-colors",
+                  c === color ? "border-ink bg-ink text-paper" : "border-transparent bg-paper hover:border-ink",
                 )}
               >
                 {c}
@@ -83,8 +83,8 @@ export function ProductPurchase({ product }: { product: ProductWithRelations }) 
                   setQty(1);
                 }}
                 className={cn(
-                  "min-w-14 border px-4 py-3 text-xs font-medium transition-colors disabled:cursor-not-allowed disabled:text-ink/30 disabled:line-through",
-                  v.id === variantId ? "border-ink bg-ink text-paper" : "border-line bg-white hover:border-ink",
+                  "min-w-14 rounded-full border px-4 py-3 text-xs font-medium transition-colors disabled:cursor-not-allowed disabled:text-ink/30 disabled:line-through",
+                  v.id === variantId ? "border-ink bg-ink text-paper" : "border-transparent bg-paper hover:border-ink",
                 )}
               >
                 {v.size}
@@ -98,13 +98,13 @@ export function ProductPurchase({ product }: { product: ProductWithRelations }) 
       )}
 
       <div className="flex gap-3">
-        <div className="flex items-center border border-line bg-white">
-          <button className="px-3 py-3.5 hover:bg-ink/5" aria-label="Decrease quantity" onClick={() => setQty((q) => Math.max(1, q - 1))}>
+        <div className="flex items-center rounded-full border border-line bg-white">
+          <button className="rounded-l-full py-3.5 pl-4 pr-3 hover:bg-ink/5" aria-label="Decrease quantity" onClick={() => setQty((q) => Math.max(1, q - 1))}>
             <Minus className="size-3.5" />
           </button>
           <span className="w-8 text-center text-sm tabular-nums">{qty}</span>
           <button
-            className="px-3 py-3.5 hover:bg-ink/5 disabled:opacity-30"
+            className="rounded-r-full py-3.5 pl-3 pr-4 hover:bg-ink/5 disabled:opacity-30"
             aria-label="Increase quantity"
             disabled={selected ? qty >= selected.stock : false}
             onClick={() => setQty((q) => q + 1)}

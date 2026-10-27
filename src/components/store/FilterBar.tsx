@@ -21,12 +21,12 @@ export function FilterBar({ categories, types, activeCategory }: Props) {
 
   const chip = (active: boolean) =>
     cn(
-      "whitespace-nowrap border px-5 py-2.5 text-[10px] font-medium uppercase tracking-[0.22em] transition-colors duration-300",
-      active ? "border-ink bg-ink text-paper" : "border-line hover:border-ink",
+      "whitespace-nowrap rounded-full border px-4 py-2 text-xs font-medium transition-colors duration-300",
+      active ? "border-ink bg-ink text-paper" : "border-transparent bg-paper hover:bg-ink hover:text-paper",
     );
 
   return (
-    <div className="flex flex-col gap-4 border-b border-line pb-6 md:flex-row md:items-center md:justify-between">
+    <div className="flex flex-col gap-4 pb-6 md:flex-row md:items-center md:justify-between">
       {categories ? (
         <div className="no-scrollbar -mx-6 flex gap-2 overflow-x-auto px-6 md:mx-0 md:px-0">
           <Link href="/shop" className={chip(!activeCategory)} scroll={false}>
@@ -47,7 +47,7 @@ export function FilterBar({ categories, types, activeCategory }: Props) {
             aria-label="Product type"
             value={params.get("type") ?? ""}
             onChange={(e) => update("type", e.target.value)}
-            className="field min-w-0 flex-1 cursor-pointer border-line py-2.5 pl-5 text-base md:w-auto md:flex-none md:text-[11px] md:uppercase md:tracking-[0.15em]"
+            className="field min-w-0 flex-1 cursor-pointer rounded-full border-transparent bg-paper py-2 pl-4 text-base md:w-auto md:flex-none md:text-xs"
           >
             <option value="">All types</option>
             {types.map((t) => (
@@ -61,7 +61,7 @@ export function FilterBar({ categories, types, activeCategory }: Props) {
           aria-label="Sort"
           value={params.get("sort") ?? ""}
           onChange={(e) => update("sort", e.target.value)}
-          className="field min-w-0 flex-1 cursor-pointer border-line py-2.5 pl-5 text-base md:w-auto md:flex-none md:text-[11px] md:uppercase md:tracking-[0.15em]"
+          className="field min-w-0 flex-1 cursor-pointer rounded-full border-transparent bg-paper py-2 pl-4 text-base md:w-auto md:flex-none md:text-xs"
         >
           <option value="">Newest</option>
           <option value="price-asc">Price: low to high</option>

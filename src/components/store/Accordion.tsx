@@ -12,7 +12,7 @@ export function Accordion({ items }: { items: { title: string; content: React.Re
       {items.map((item, i) => (
         <div key={item.title}>
           <button className="flex w-full items-center justify-between py-5 text-left" onClick={() => setOpen(open === i ? null : i)} aria-expanded={open === i}>
-            <span className="eyebrow">{item.title}</span>
+            <span className="text-sm font-medium tracking-tight">{item.title}</span>
             <Plus className={cn("size-4 transition-transform duration-300", open === i && "rotate-45")} strokeWidth={1.5} />
           </button>
           <AnimatePresence initial={false}>

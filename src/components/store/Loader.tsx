@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 /**
  * Plain intro: a white page with the wordmark. Server-rendered, so it covers the page from the very
- * first paint; once the page has loaded (and the logo has been up for a moment) it fades out and
+ * first paint; once the page has loaded (and the logo has been up for a moment while it comes into focus) it fades out and
  * unmounts.
  */
 export function Loader() {
@@ -15,7 +15,7 @@ export function Loader() {
     const started = performance.now();
     let hide: ReturnType<typeof setTimeout>;
     const done = () => {
-      const wait = Math.max(0, 900 - (performance.now() - started));
+      const wait = Math.max(0, 1900 - (performance.now() - started));
       hide = setTimeout(() => setPhase("fade"), wait);
     };
     if (document.readyState === "complete") done();
@@ -37,7 +37,7 @@ export function Loader() {
       onTransitionEnd={() => phase === "fade" && setPhase("gone")}
       className={`fixed inset-0 z-[100] grid place-items-center bg-white transition-opacity duration-700 ease-out ${phase === "fade" ? "pointer-events-none opacity-0" : "opacity-100"}`}
     >
-      <Image src="/brand/logo-black.png" alt="" width={960} height={220} priority className="h-10 w-auto sm:h-12" />
+      <Image src="/brand/logo-black.png" alt="" width={960} height={220} priority className="loader-logo h-10 w-auto sm:h-12" />
     </div>
   );
 }

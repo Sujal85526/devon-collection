@@ -3,6 +3,7 @@ import { CartDrawer } from "@/components/store/CartDrawer";
 import { ComingSoon } from "@/components/store/ComingSoon";
 import { Footer } from "@/components/store/Footer";
 import { Header } from "@/components/store/Header";
+import { Loader } from "@/components/store/Loader";
 import { getStoreSettings } from "@/lib/catalog";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -16,6 +17,7 @@ export default async function StoreLayout({ children }: LayoutProps<"/">) {
   if (!settings.store_open) return <div className="theme-dark"><ComingSoon /></div>;
   return (
     <div className="theme-dark min-h-dvh">
+      <Loader />
       <Header />
       <main>{children}</main>
       <Footer />

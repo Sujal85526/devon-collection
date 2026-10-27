@@ -46,15 +46,15 @@ export function CartDrawer({ freeShippingThreshold }: { freeShippingThreshold: n
           <motion.aside
             role="dialog"
             aria-label="Shopping bag"
-            className="fixed inset-y-0 right-0 z-50 flex w-[92vw] max-w-md flex-col bg-paper shadow-2xl"
+            className="fixed inset-y-1.5 right-1.5 z-50 flex w-[calc(100vw-0.75rem)] max-w-md flex-col overflow-hidden rounded-[1.25rem] bg-paper shadow-2xl"
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ duration: 0.55, ease }}
           >
             <div className="flex items-center justify-between px-6 pb-2 pt-7 sm:px-8">
-              <h2 className="font-script text-5xl leading-none">
-                Your bag{count > 0 && <span className="ml-2 font-serif text-xl text-ink/50">({count})</span>}
+              <h2 className="font-script text-3xl leading-none">
+                Your bag{count > 0 && <span className="ml-2 text-base text-ink/50">({count})</span>}
               </h2>
               <button onClick={close} aria-label="Close bag" className="grid size-10 place-items-center rounded-full transition-colors hover:bg-ink/5">
                 <X className="size-5" strokeWidth={1.4} />
@@ -64,7 +64,7 @@ export function CartDrawer({ freeShippingThreshold }: { freeShippingThreshold: n
             {lines.length === 0 ? (
               <div className="flex flex-1 flex-col items-center justify-center gap-6 px-8 text-center">
                 <div>
-                  <p className="font-serif text-2xl italic">Your bag is empty</p>
+                  <p className="font-script text-3xl">Your bag is <em>empty</em></p>
                   <p className="mt-2 text-sm text-muted">Your next favourite abaya is waiting.</p>
                 </div>
                 <Link href="/shop" className="btn-primary" onClick={close}>
@@ -74,7 +74,7 @@ export function CartDrawer({ freeShippingThreshold }: { freeShippingThreshold: n
             ) : (
               <div className="flex flex-1 flex-col overflow-y-auto px-6 sm:px-8">
                 {/* Free delivery */}
-                <div className="mt-5 flex items-center gap-4 border border-line bg-white px-4 py-3.5">
+                <div className="mt-5 flex items-center gap-4 rounded-xl bg-paper-light px-4 py-3.5">
                   <Gift className="size-6 shrink-0 text-ink" strokeWidth={1.2} aria-hidden />
                   <div className="flex-1">
                     <p className="text-[13px] text-ink">
@@ -86,7 +86,7 @@ export function CartDrawer({ freeShippingThreshold }: { freeShippingThreshold: n
                         <>You&apos;ve unlocked <strong className="font-semibold">free delivery</strong></>
                       )}
                     </p>
-                    <div className="mt-2 h-1 overflow-hidden bg-ink/10" role="progressbar" aria-valuenow={Math.round(progress)} aria-valuemin={0} aria-valuemax={100}>
+                    <div className="mt-2 h-1 overflow-hidden rounded-full bg-ink/10" role="progressbar" aria-valuenow={Math.round(progress)} aria-valuemin={0} aria-valuemax={100}>
                       <motion.div className="h-full bg-rose" initial={false} animate={{ width: `${progress}%` }} transition={{ duration: 0.7, ease }} />
                     </div>
                   </div>
@@ -104,7 +104,7 @@ export function CartDrawer({ freeShippingThreshold }: { freeShippingThreshold: n
                         exit={{ opacity: 0, height: 0, transition: { duration: 0.3 } }}
                         className="flex gap-4 py-5"
                       >
-                        <Link href={`/product/${line.slug}`} onClick={close} className="relative aspect-[3/4] w-20 shrink-0 overflow-hidden bg-paper-light sm:w-24">
+                        <Link href={`/product/${line.slug}`} onClick={close} className="relative aspect-[3/4] w-20 shrink-0 overflow-hidden rounded-lg bg-paper-deep sm:w-24">
                           {line.image ? (
                             <Image src={line.image} alt={line.name} fill sizes="96px" className="object-cover" />
                           ) : (
@@ -114,7 +114,7 @@ export function CartDrawer({ freeShippingThreshold }: { freeShippingThreshold: n
                         <div className="flex min-w-0 flex-1 flex-col">
                           <div className="flex items-start justify-between gap-3">
                             <div className="min-w-0">
-                              <Link href={`/product/${line.slug}`} onClick={close} className="block truncate font-serif text-lg leading-tight hover:underline">
+                              <Link href={`/product/${line.slug}`} onClick={close} className="block truncate text-[15px] font-medium leading-tight tracking-tight hover:underline">
                                 {line.name}
                               </Link>
                               {line.variantLabel && <p className="mt-1 text-xs text-muted">{line.variantLabel}</p>}
@@ -128,7 +128,7 @@ export function CartDrawer({ freeShippingThreshold }: { freeShippingThreshold: n
                             </button>
                           </div>
                           <div className="mt-auto flex items-center justify-between pt-3">
-                            <div className="flex items-center border border-line bg-white">
+                            <div className="flex items-center rounded-full bg-paper-light">
                               <button className="grid size-8 place-items-center hover:bg-ink/5" aria-label="Decrease" onClick={() => setQuantity(line.variantId, line.quantity - 1)}>
                                 <Minus className="size-3" />
                               </button>

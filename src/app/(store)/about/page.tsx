@@ -34,24 +34,24 @@ export default async function AboutPage() {
         focus="center 30%"
       />
 
-      <section className="mx-auto max-w-3xl px-6 py-20 text-center md:py-28">
+      <section className="mx-auto max-w-3xl px-6 py-14 text-center md:py-20">
         <Reveal>
-          <p className="font-serif text-[clamp(22px,2.4vw,32px)] leading-[1.45]">
+          <p className="font-serif text-[clamp(22px,2.4vw,32px)] leading-[1.3]">
             Each piece is designed in the UAE and finished by hand — embroidery stitched thread by thread, crystals set one at a time, lengths cut to
             fit. We keep our collections small so <span className="italic">every abaya gets our full attention</span>.
           </p>
         </Reveal>
       </section>
 
-      <section className="mx-auto grid max-w-[1440px] gap-5 px-5 md:grid-cols-3 md:px-10">
+      <section className="mx-1.5 grid gap-2 sm:mx-[22px] md:grid-cols-3 md:gap-3.5">
         {["/images/layal-detail.jpg", "/images/rack.jpg", "/images/lulu-ivory-lace.jpg"].map((src, i) => (
-          <Reveal key={src} delay={i * 0.08} className="relative aspect-[3/4] overflow-hidden bg-paper-light">
+          <Reveal key={src} delay={i * 0.08} className="relative aspect-[3/4] overflow-hidden rounded-[12px] bg-paper-deep">
             <Image src={src} alt="" fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover" />
           </Reveal>
         ))}
       </section>
 
-      <section className="mx-auto grid max-w-[1440px] gap-16 px-5 py-24 md:grid-cols-2 md:gap-20 md:px-10 md:py-32">
+      <section className="panel mx-1.5 my-6 grid gap-14 px-5 py-12 sm:mx-[22px] md:grid-cols-2 md:gap-20 md:px-10 md:py-16">
         <div id="sizing" className="scroll-mt-32">
           <p className="eyebrow text-rose">Size guide</p>
           <h2 className="mt-4 font-script text-4xl leading-none md:text-5xl">Choosing your length</h2>
@@ -61,9 +61,9 @@ export default async function AboutPage() {
           </p>
           <table className="mt-8 w-full max-w-md text-left text-sm">
             <thead>
-              <tr className="border-b border-ink text-[10.5px] uppercase tracking-[0.2em]">
-                <th className="py-3 font-semibold">Length</th>
-                <th className="py-3 font-semibold">Your height</th>
+              <tr className="border-b border-ink text-xs">
+                <th className="py-3 font-medium">Length</th>
+                <th className="py-3 font-medium">Your height</th>
                 <th className="py-3 font-semibold" />
               </tr>
             </thead>
@@ -115,7 +115,7 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-ink px-6 py-20 text-center text-paper md:py-24">
+      <section className="mx-1.5 rounded-[1.25rem] bg-ink px-6 py-20 text-center text-paper sm:mx-[22px] md:py-24">
         <Image src="/brand/logo-pink.png" alt="Devon Collection" width={960} height={220} className="mx-auto h-12 w-auto md:h-16" />
         <Link href="/shop" className="btn mt-10 border border-paper/70 text-paper hover:border-rose hover:bg-rose">
           Shop the collection

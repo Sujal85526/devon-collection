@@ -98,7 +98,7 @@ export function ProductPurchase({ product }: { product: ProductWithRelations }) 
       )}
 
       <div className="flex gap-3">
-        <div className="flex items-center rounded-full border border-line bg-white">
+        <div className="flex items-center rounded-full border border-line bg-paper-deep">
           <button className="rounded-l-full py-3.5 pl-4 pr-3 hover:bg-ink/5" aria-label="Decrease quantity" onClick={() => setQty((q) => Math.max(1, q - 1))}>
             <Minus className="size-3.5" />
           </button>

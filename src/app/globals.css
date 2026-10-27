@@ -62,20 +62,20 @@
 @utility btn {
   @apply inline-flex items-center justify-center gap-2.5 rounded-full px-7 py-3.5 text-xs font-medium uppercase tracking-[0.04em] transition-colors duration-300 disabled:cursor-not-allowed disabled:opacity-50;
 }
-@utility btn-primary { @apply btn bg-ink text-paper hover:bg-rose; }
+@utility btn-primary { @apply btn bg-ink text-paper hover:bg-rose hover:text-white; }
 @utility btn-outline { @apply btn border border-ink/25 text-ink hover:border-ink hover:bg-ink hover:text-paper; }
 @utility btn-light { @apply btn border border-white/70 text-white hover:bg-white hover:text-ink; }
 @utility link-arrow {
   @apply inline-flex items-center gap-2 text-[13px] font-medium transition-[gap,color] duration-300 hover:gap-3 hover:text-rose;
 }
 @utility field {
-  @apply w-full rounded-xl border border-ink/12 bg-white px-4 py-3 text-base text-ink md:text-sm placeholder:text-muted/70 transition-colors focus:border-ink focus:outline-none;
+  @apply w-full rounded-xl border border-ink/15 bg-paper-deep px-4 py-3 text-base text-ink md:text-sm placeholder:text-muted/70 transition-colors focus:border-ink focus:outline-none;
 }
 @utility label {
   @apply mb-1.5 block text-xs font-medium text-ink/70;
 }
 @utility checkout-input {
-  @apply h-12 w-full rounded-xl border border-ink/12 bg-white px-4 text-base text-ink placeholder:text-muted/60 transition-[border-color,box-shadow] duration-200 focus:border-ink focus:shadow-[0_0_0_3px_rgba(222,9,127,0.12)] focus:outline-none sm:text-sm;
+  @apply h-12 w-full rounded-xl border border-ink/15 bg-paper-deep px-4 text-base text-ink placeholder:text-muted/60 transition-[border-color,box-shadow] duration-200 focus:border-ink focus:shadow-[0_0_0_3px_rgba(222,9,127,0.25)] focus:outline-none sm:text-sm;
 }
 
 .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -121,3 +121,23 @@ select:not([multiple]) {
 
 /* The header is fixed: pages without a photo hero start below it. */
 body:not(:has([data-hero])) main { padding-top: 3.5rem; }
+
+/* The storefront is dark: black page, charcoal panels, ivory type. Scoped to the store layout so the
+   admin keeps the light palette. Utilities read these variables, so bg-paper / text-ink just flip. */
+.theme-dark {
+  --color-ink: #f4f1ee;
+  --color-ink-deep: #ffffff;
+  --color-paper: #161515;
+  --color-paper-light: #0a0a0a;
+  --color-paper-deep: #262424;
+  --color-line: #2e2c2c;
+  --color-muted: #9d9590;
+  --color-blush: #3a0c25;
+  color-scheme: dark;
+  background: var(--color-paper-light);
+  color: var(--color-ink);
+}
+html:has(.theme-dark), body:has(.theme-dark) { background: #0a0a0a; }
+.theme-dark select:not([multiple]) {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23f4f1ee' stroke-width='1.5' viewBox='0 0 24 24'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}

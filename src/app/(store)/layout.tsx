@@ -13,13 +13,13 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function StoreLayout({ children }: LayoutProps<"/">) {
   const settings = await getStoreSettings();
   // Switched off in the admin: every storefront page shows the "back soon" page instead.
-  if (!settings.store_open) return <ComingSoon />;
+  if (!settings.store_open) return <div className="theme-dark"><ComingSoon /></div>;
   return (
-    <>
+    <div className="theme-dark min-h-dvh">
       <Header />
       <main>{children}</main>
       <Footer />
       <CartDrawer freeShippingThreshold={settings.free_shipping_threshold} />
-    </>
+    </div>
   );
 }

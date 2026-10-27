@@ -46,10 +46,10 @@ export function CollectionCarousel({ slides }: { slides: Slide[] }) {
           <Link
             key={s.title}
             href={s.href}
-            className="relative h-[62svh] max-h-[560px] min-h-[380px] w-[86%] shrink-0 snap-center overflow-hidden bg-ink first:ml-[7%] last:mr-[7%] sm:w-[60%] sm:first:ml-[20%] sm:last:mr-[20%]"
+            className="relative h-[62svh] max-h-[560px] min-h-[380px] w-[86%] shrink-0 snap-center overflow-hidden bg-black first:ml-[7%] last:mr-[7%] sm:w-[60%] sm:first:ml-[20%] sm:last:mr-[20%]"
           >
             <Image src={s.image} alt="" fill loading={i < 2 ? "eager" : undefined} sizes="(min-width: 640px) 60vw, 86vw" className="object-cover" />
-            <span className="absolute inset-0 bg-ink/30" />
+            <span className="absolute inset-0 bg-black/30" />
             <span className="absolute inset-x-0 top-1/2 flex -translate-y-1/2 flex-col items-center text-center text-white">
               <span className="text-[clamp(1.5rem,3.2vw,2.6rem)] font-medium uppercase leading-none tracking-[-0.035em]">{s.title}</span>
               <span className="mt-3 text-xs font-medium uppercase tracking-wide">Shop now</span>

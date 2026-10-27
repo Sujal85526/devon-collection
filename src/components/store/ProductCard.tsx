@@ -67,7 +67,7 @@ export function ProductCard({
           </>
         ) : (
           <div className="grid h-full place-items-center">
-            <Image src="/brand/logo-black.png" alt="" width={960} height={220} className="w-1/2 opacity-15" />
+            <Image src="/brand/logo-white.png" alt="" width={960} height={220} className="w-1/2 opacity-15" />
           </div>
         )}
         <div className="absolute left-3 top-3 flex flex-col gap-1.5">

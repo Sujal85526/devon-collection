@@ -165,14 +165,14 @@ export function CheckoutForm({ shippingFlat, freeShippingThreshold, defaults }: 
         <div className="flex items-center justify-between">
           <dt className="flex items-center gap-2 text-ink/70">
             Discount
-            <span className="inline-flex items-center gap-1.5 bg-rose/12 px-2 py-0.5 text-[10px] font-semibold tracking-[0.04em] text-[#a8075f]">
+            <span className="inline-flex items-center gap-1.5 bg-rose/12 px-2 py-0.5 text-[10px] font-semibold tracking-[0.04em] text-[#ff7fc3]">
               {coupon.code}
-              <button type="button" aria-label="Remove code" className="text-[#a8075f]/70 hover:text-[#a8075f]" onClick={() => setCoupon(null)}>
+              <button type="button" aria-label="Remove code" className="text-[#ff7fc3]/70 hover:text-[#ff7fc3]" onClick={() => setCoupon(null)}>
                 ×
               </button>
             </span>
           </dt>
-          <dd className="tabular-nums text-[#a8075f]">−{formatPrice(discount)}</dd>
+          <dd className="tabular-nums text-[#ff7fc3]">−{formatPrice(discount)}</dd>
         </div>
       )}
       <div className="flex justify-between">
@@ -270,7 +270,7 @@ export function CheckoutForm({ shippingFlat, freeShippingThreshold, defaults }: 
 
         <section>
           <StepTitle n={3} title="Payment" />
-          <label className="flex cursor-pointer items-start gap-4 border border-ink bg-white p-5">
+          <label className="flex cursor-pointer items-start gap-4 border border-ink bg-paper-deep p-5">
             <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full border-2 border-ink">
               <span className="size-2.5 rounded-full bg-ink" />
             </span>
@@ -297,7 +297,7 @@ export function CheckoutForm({ shippingFlat, freeShippingThreshold, defaults }: 
 
       {/* Desktop: sticky summary */}
       <aside className="hidden lg:block">
-        <div className="sticky top-24 bg-white p-8 border border-line">
+        <div className="sticky top-24 bg-paper-deep p-8 border border-line">
           <h2 className="eyebrow mb-6">Order summary</h2>
           {items}
           <div className="my-6 border-t border-ink/10" />

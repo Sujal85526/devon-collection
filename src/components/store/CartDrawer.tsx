@@ -37,7 +37,7 @@ export function CartDrawer({ freeShippingThreshold }: { freeShippingThreshold: n
       {isOpen && (
         <>
           <motion.div
-            className="fixed inset-0 z-50 bg-black/45 backdrop-blur-[2px]"
+            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-[2px]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -108,7 +108,7 @@ export function CartDrawer({ freeShippingThreshold }: { freeShippingThreshold: n
                           {line.image ? (
                             <Image src={line.image} alt={line.name} fill sizes="96px" className="object-cover" />
                           ) : (
-                            <Image src="/brand/logo-black.png" alt="" fill sizes="96px" className="object-contain p-3 opacity-20" />
+                            <Image src="/brand/logo-white.png" alt="" fill sizes="96px" className="object-contain p-3 opacity-20" />
                           )}
                         </Link>
                         <div className="flex min-w-0 flex-1 flex-col">

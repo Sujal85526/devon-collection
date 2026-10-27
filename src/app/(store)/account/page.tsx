@@ -15,7 +15,7 @@ export const metadata: Metadata = { title: "My account", robots: { index: false 
 type OrderWithItems = Order & { order_items: { product_name: string; image_url: string | null; quantity: number }[] };
 
 const statusTone = (s: string) =>
-  s === "delivered" ? "bg-sage/25 text-[#4f6312]" : s === "cancelled" || s === "returned" ? "bg-ink/5 text-ink/60" : s === "shipped" || s === "out_for_delivery" ? "bg-rose/15 text-[#a8075f]" : "bg-alert/15 text-[#b4532a]";
+  s === "delivered" ? "bg-sage/25 text-[#b7d27a]" : s === "cancelled" || s === "returned" ? "bg-ink/5 text-ink/60" : s === "shipped" || s === "out_for_delivery" ? "bg-rose/15 text-[#ff7fc3]" : "bg-alert/15 text-[#f0a37c]";
 
 export default async function AccountPage() {
   if (!isSupabaseConfigured) redirect("/account/login");
@@ -81,7 +81,7 @@ export default async function AccountPage() {
             <ul className="space-y-3">
               {orders.map((o) => (
                 <li key={o.id}>
-                  <Link href={`/order/${o.order_number}`} className="group flex items-center gap-4 rounded-2xl bg-paper p-4 transition-colors hover:bg-white sm:p-5">
+                  <Link href={`/order/${o.order_number}`} className="group flex items-center gap-4 rounded-2xl bg-paper p-4 transition-colors hover:bg-paper-deep sm:p-5">
                     <div className="flex -space-x-3">
                       {o.order_items.slice(0, 3).map((it, i) => (
                         <div key={i} className="relative size-12 overflow-hidden border-2 border-white bg-paper-light sm:size-14">

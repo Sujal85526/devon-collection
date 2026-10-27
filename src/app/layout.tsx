@@ -32,7 +32,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Toaster
           position="bottom-center"
           toastOptions={{
-            style: { background: "#111010", color: "#ffffff", border: "none", borderRadius: 9999, fontFamily: "var(--font-instrument-sans)" },
+            style: { background: "#2a2828", color: "#ffffff", border: "none", borderRadius: 9999, fontFamily: "var(--font-instrument-sans)" },
           }}
         />
       </body>

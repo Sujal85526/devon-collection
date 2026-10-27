@@ -10,7 +10,7 @@ export function ProductGallery({ images, name }: { images: string[]; name: strin
   if (images.length === 0) {
     return (
       <div className="grid aspect-[3/4] place-items-center bg-paper-light">
-        <Image src="/brand/logo-black.png" alt="" width={960} height={220} className="w-1/2 opacity-15" />
+        <Image src="/brand/logo-white.png" alt="" width={960} height={220} className="w-1/2 opacity-15" />
       </div>
     );
   }

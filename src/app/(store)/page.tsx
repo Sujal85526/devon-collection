@@ -41,20 +41,10 @@ export default async function HomePage() {
   return (
     <>
       {/* Hero: two campaign photos side by side, the header floats over them. */}
-      <section data-hero className="relative h-[85svh] min-h-[560px] overflow-hidden bg-ink text-white lg:h-[100svh]">
-        {/* The reel is portrait: phones fill the screen with it; wider screens show it whole, over a blurred copy. */}
+      <section data-hero className="relative h-[85svh] min-h-[560px] overflow-hidden bg-black text-white lg:h-[100svh]">
+        {/* Phones: the portrait reel fills the screen. Laptops: two campaign photos side by side. */}
         <video
-          aria-hidden
-          className="absolute inset-0 hidden h-full w-full scale-125 object-cover opacity-80 blur-2xl md:block"
-          src="/video/hero-1.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          tabIndex={-1}
-        />
-        <video
-          className="absolute inset-0 h-full w-full object-cover md:object-contain"
+          className="absolute inset-0 h-full w-full object-cover md:hidden"
           src="/video/hero-1.mp4"
           poster="/video/hero-1-poster.jpg"
           autoPlay
@@ -64,8 +54,24 @@ export default async function HomePage() {
           preload="auto"
           aria-label="Model in the Layal beaded abaya"
         />
-        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-ink/40 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-ink/85 via-ink/45 to-transparent" />
+        <div className="absolute inset-0 hidden md:grid md:grid-cols-2">
+          <div className="relative overflow-hidden">
+            <Image
+              src="/images/noor-embroidered.jpg"
+              alt="Model in the Noor embroidered black abaya"
+              fill
+              priority
+              quality={90}
+              sizes="50vw"
+              className="hero-zoom object-cover object-[center_30%]"
+            />
+          </div>
+          <div className="relative overflow-hidden">
+            <Image src="/images/rack.jpg" alt="Satin abayas in royal blue, fuchsia and sand on Devon hangers" fill priority quality={90} sizes="50vw" className="hero-zoom object-cover" />
+          </div>
+        </div>
+        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/40 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/85 via-black/45 to-transparent" />
         <div className="hero-rise absolute inset-x-0 bottom-[9%] flex flex-col items-center px-6 text-center">
           <p className="mb-3 font-serif text-[clamp(1.8rem,3.4vw,2.8rem)] italic leading-none">Luxury in each detail</p>
           <Link href="/shop" className="border-b border-white/80 pb-1 text-[15px] font-medium transition-colors hover:border-transparent">
@@ -104,7 +110,7 @@ export default async function HomePage() {
         <Reveal className="grid gap-2 md:grid-cols-3 md:gap-3.5">
           {HOUSE.map((h) => (
             <article key={h.title} className="panel p-2.5">
-              <Link href={h.href} className="group relative block aspect-[4/5] overflow-hidden rounded-[12px] bg-ink md:aspect-[6/7]">
+              <Link href={h.href} className="group relative block aspect-[4/5] overflow-hidden rounded-[12px] bg-paper-deep md:aspect-[6/7]">
                 <Image src={h.image} alt="" fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
               </Link>
               <div className="grid gap-2 px-2 pb-2 pt-4 sm:grid-cols-[1fr_1.4fr] sm:gap-4">

@@ -124,7 +124,7 @@ export function Header() {
               onClick={() => setOpen((v) => !v)}
               className={cn(
                 "ml-2 hidden h-[26px] w-[42px] place-items-center rounded-full transition-colors lg:grid",
-                clear ? "bg-white/90 text-ink" : "bg-paper-light hover:bg-paper-deep",
+                clear ? "bg-white/90 text-black" : "bg-paper-light hover:bg-paper-deep",
               )}
             >
               {open ? <X className="size-4" strokeWidth={1.5} /> : <MenuGlyph wide />}
@@ -149,7 +149,7 @@ export function Header() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-40 bg-ink/30"
+              className="fixed inset-0 z-40 bg-black/50"
               onClick={() => setOpen(false)}
             />
             <motion.div

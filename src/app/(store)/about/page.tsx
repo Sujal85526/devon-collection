@@ -115,9 +115,9 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <section className="mx-1.5 rounded-[1.25rem] bg-ink px-6 py-20 text-center text-paper sm:mx-[22px] md:py-24">
+      <section className="mx-1.5 rounded-[1.25rem] bg-black px-6 py-20 text-center text-white sm:mx-[22px] md:py-24">
         <Image src="/brand/logo-pink.png" alt="Devon Collection" width={960} height={220} className="mx-auto h-12 w-auto md:h-16" />
-        <Link href="/shop" className="btn mt-10 border border-paper/70 text-paper hover:border-rose hover:bg-rose">
+        <Link href="/shop" className="btn mt-10 border border-white/70 text-white hover:border-rose hover:bg-rose">
           Shop the collection
         </Link>
       </section>

@@ -44,7 +44,7 @@ export function ProductCard({
 
   return (
     <div className="group">
-      <Link href={`/product/${product.slug}`} className={cn("relative block overflow-hidden bg-paper-light", tileClassName)}>
+      <Link href={`/product/${product.slug}`} className={cn("relative block overflow-hidden rounded-[10px] bg-paper-deep", tileClassName)}>
         {first ? (
           <>
             <Image
@@ -71,15 +71,15 @@ export function ProductCard({
           </div>
         )}
         <div className="absolute left-3 top-3 flex flex-col gap-1.5">
-          {soldOut && <span className="bg-ink px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.2em] text-paper">Sold out</span>}
-          {!soldOut && onSale && <span className="bg-rose px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.2em] text-white">Sale</span>}
+          {soldOut && <span className="rounded-full bg-paper/90 px-2.5 py-1 text-[11px] text-ink">Sold out</span>}
+          {!soldOut && onSale && <span className="rounded-full bg-rose px-2.5 py-1 text-[11px] text-white">Sale</span>}
         </div>
       </Link>
-      <div className="mt-4 flex items-start justify-between gap-3">
+      <div className="flex items-start justify-between gap-2 px-1 pt-2.5 sm:px-3">
         <Link href={`/product/${product.slug}`} className="min-w-0">
-          <h3 className="font-serif text-[15px] leading-snug md:text-base">{product.name}</h3>
+          <h3 className="truncate text-[12px] font-medium leading-snug sm:text-[13px]">{product.name}</h3>
           {showPrice && (
-            <p className="mt-1 text-[12px] tracking-[0.06em] text-ink/70">
+            <p className="text-[12px] text-ink/70 sm:text-[13px]">
               {onSale && <span className="mr-2 text-rose">{formatPrice(product.price)}</span>}
               {onSale ? <span className="text-muted line-through">{formatPrice(product.compare_at_price)}</span> : formatPrice(product.price)}
             </p>
@@ -89,17 +89,17 @@ export function ProductCard({
           <button
             onClick={quickAdd}
             aria-label={`Add ${product.name} to bag`}
-            className="-mr-2 grid size-10 shrink-0 place-items-center text-ink/70 transition-all duration-300 hover:rotate-90 hover:text-rose md:mr-0 md:size-7"
+            className="-mr-1 grid size-9 shrink-0 place-items-center rounded-full text-ink/70 transition-all duration-300 hover:bg-paper-deep md:mr-0 md:size-7"
           >
-            <Plus className="size-4" strokeWidth={1.4} />
+            <Plus className="size-3.5" strokeWidth={1.5} />
           </button>
         ) : (
           <Link
             href={`/product/${product.slug}`}
             aria-label={`Choose options for ${product.name}`}
-            className="-mr-2 grid size-10 shrink-0 place-items-center text-ink/70 transition-all duration-300 hover:rotate-90 hover:text-rose md:mr-0 md:size-7"
+            className="-mr-1 grid size-9 shrink-0 place-items-center rounded-full text-ink/70 transition-all duration-300 hover:bg-paper-deep md:mr-0 md:size-7"
           >
-            <Plus className="size-4" strokeWidth={1.4} />
+            <Plus className="size-3.5" strokeWidth={1.5} />
           </Link>
         )}
       </div>

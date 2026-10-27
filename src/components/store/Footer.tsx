@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { BRAND, whatsappLink } from "@/lib/brand";
+import { Logo } from "./Logo";
 
 const COLUMNS = [
   {
@@ -13,7 +13,7 @@ const COLUMNS = [
     ],
   },
   {
-    title: "Help",
+    title: "Order support",
     links: [
       { href: "/track", label: "Track your order" },
       { href: "/account", label: "My account" },
@@ -23,52 +23,52 @@ const COLUMNS = [
   },
 ];
 
-/** Black, like the Devon box — fuchsia wordmark and quiet ivory type. */
+/** A raised white panel of link columns with the wordmark on the right. */
 export function Footer() {
   return (
-    <footer className="bg-ink text-paper">
-      <div className="mx-auto grid max-w-[1440px] grid-cols-2 gap-x-6 gap-y-10 px-6 pb-10 pt-14 md:grid-cols-[1.5fr_1fr_1fr_1.2fr] md:gap-12 md:px-10 md:py-20">
-        <div className="col-span-2 md:col-span-1">
-          <Image src="/brand/logo-pink.png" alt="Devon Collection" width={960} height={220} className="h-10 w-auto md:h-12" />
-          <p className="mt-6 max-w-xs font-serif text-lg italic text-paper/80">{BRAND.tagline}.</p>
-          <p className="mt-2 max-w-xs text-[13px] leading-relaxed text-paper/50">Luxury abayas, made in the UAE and delivered in the signature Devon box.</p>
-        </div>
-        {COLUMNS.map((col) => (
-          <div key={col.title}>
-            <h3 className="eyebrow text-paper/45">{col.title}</h3>
-            <ul className="mt-4 space-y-1 md:mt-6 md:space-y-3">
-              {col.links.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="inline-block py-1 text-[13px] text-paper/85 transition-colors hover:text-rose md:py-0">
-                    {link.label}
-                  </Link>
+    <footer className="px-1.5 pb-1.5 pt-2 sm:px-[22px] sm:pb-[22px]">
+      <div className="panel px-5 pt-10 sm:px-10 sm:pt-12">
+        <div className="grid gap-10 lg:grid-cols-[3fr_1.2fr]">
+          <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3">
+            {COLUMNS.map((col) => (
+              <div key={col.title}>
+                <h3 className="text-[15px] font-medium tracking-tight">{col.title}</h3>
+                <ul className="mt-5 space-y-3 text-[13px] text-ink/75">
+                  {col.links.map((l) => (
+                    <li key={l.href}>
+                      <Link href={l.href} className="transition-colors hover:text-rose">{l.label}</Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+            <div className="col-span-2 sm:col-span-1">
+              <h3 className="text-[15px] font-medium tracking-tight">Connect with us</h3>
+              <ul className="mt-5 space-y-3 text-[13px] text-ink/75">
+                <li>
+                  <a href={whatsappLink("Hello Devon Collection")} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-rose">
+                    WhatsApp {BRAND.phoneDisplay}
+                  </a>
                 </li>
-              ))}
-            </ul>
+                <li>
+                  <a href={BRAND.instagram} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-rose">
+                    Instagram {BRAND.instagramHandle}
+                  </a>
+                </li>
+                <li className="text-ink/50">Abaya home service across the UAE</li>
+              </ul>
+            </div>
           </div>
-        ))}
-        <div className="col-span-2 md:col-span-1">
-          <h3 className="eyebrow text-paper/45">Say hello</h3>
-          <ul className="mt-4 space-y-2 text-[13px] text-paper/85 md:mt-6 md:space-y-3">
-            <li>
-              <a href={whatsappLink("Hello Devon Collection")} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-rose">
-                WhatsApp {BRAND.phoneDisplay}
-              </a>
-            </li>
-            <li>
-              <a href={BRAND.instagram} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-rose">
-                Instagram {BRAND.instagramHandle}
-              </a>
-            </li>
-            <li className="text-paper/50">Abaya home service across the UAE</li>
-          </ul>
+          <div className="flex flex-col gap-4 lg:items-end lg:text-right">
+            <Logo className="h-7 sm:h-8" />
+            <p className="font-serif text-lg italic text-ink/70">{BRAND.tagline}.</p>
+            <p className="max-w-xs text-xs leading-relaxed text-ink/55">Luxury abayas, made in the UAE and delivered in the signature Devon box.</p>
+          </div>
         </div>
-      </div>
-      <div className="border-t border-paper/10">
-        <div className="mx-auto flex max-w-[1440px] flex-col items-center justify-between gap-2 px-6 py-6 text-[11px] uppercase tracking-[0.2em] text-paper/40 md:flex-row md:px-10">
-          <p>© {new Date().getFullYear()} Devon Collection</p>
+        <div className="mt-12 flex flex-col items-center justify-between gap-1.5 border-t border-ink/10 py-6 text-center text-[11px] text-ink/50 sm:flex-row">
+          <p>© {new Date().getFullYear()} Devon Collection. All rights reserved.</p>
           <p>
-            Licensed by the DED · <span lang="ar" dir="rtl" className="text-[12px] normal-case tracking-normal">مرخصين من الدائرة الاقتصادية</span>
+            Licensed by the DED · <span lang="ar" dir="rtl">مرخصين من الدائرة الاقتصادية</span>
           </p>
         </div>
       </div>

@@ -42,30 +42,28 @@ export default async function HomePage() {
     <>
       {/* Hero: two campaign photos side by side, the header floats over them. */}
       <section data-hero className="relative h-[85svh] min-h-[560px] overflow-hidden bg-ink text-white lg:h-[100svh]">
-        <div className="absolute inset-0 grid md:grid-cols-2">
-          <video
-            className="h-full w-full object-cover"
-            src="/video/hero-1.mp4"
-            poster="/video/hero-1-poster.jpg"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            aria-label="Model in the Layal beaded abaya"
-          />
-          <video
-            className="hidden h-full w-full object-cover md:block"
-            src="/video/hero-2.mp4"
-            poster="/video/hero-2-poster.jpg"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            aria-label="Model in the Sahar classic abaya"
-          />
-        </div>
+        {/* The reel is portrait: phones fill the screen with it; wider screens show it whole, over a blurred copy. */}
+        <video
+          aria-hidden
+          className="absolute inset-0 hidden h-full w-full scale-125 object-cover opacity-80 blur-2xl md:block"
+          src="/video/hero-1.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          tabIndex={-1}
+        />
+        <video
+          className="absolute inset-0 h-full w-full object-cover md:object-contain"
+          src="/video/hero-1.mp4"
+          poster="/video/hero-1-poster.jpg"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          aria-label="Model in the Layal beaded abaya"
+        />
         <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-ink/40 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-ink/85 via-ink/45 to-transparent" />
         <div className="hero-rise absolute inset-x-0 bottom-[9%] flex flex-col items-center px-6 text-center">

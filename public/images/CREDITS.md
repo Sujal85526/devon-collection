@@ -14,6 +14,6 @@ cropped for the web. `packaging.jpg` and the wordmark in `public/brand/` come fr
 
 Replace them with studio shots from the admin (Products → edit → images) whenever new photography is ready.
 
-## Hero videos
+## Hero video
 
-`public/video/hero-1.mp4` is instagram.com/reel/DVmQQHnkiEv and `hero-2.mp4` is instagram.com/reel/DVlG_oMEdeS, re-encoded muted for the web.
+`public/video/hero-1.mp4` is instagram.com/reel/DVmQQHnkiEv, re-encoded muted for the web.

@@ -59,7 +59,7 @@ export default async function HomePage() {
           </div>
         </div>
         <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-ink/40 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-ink/55 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-ink/75 via-ink/30 to-transparent" />
         <div className="hero-rise absolute inset-x-0 bottom-[9%] flex flex-col items-center px-6 text-center">
           <p className="mb-3 font-serif text-[clamp(1.8rem,3.4vw,2.8rem)] italic leading-none">Luxury in each detail</p>
           <Link href="/shop" className="border-b border-white/80 pb-1 text-[15px] font-medium transition-colors hover:border-transparent">

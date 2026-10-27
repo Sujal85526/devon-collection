@@ -43,23 +43,31 @@ export default async function HomePage() {
       {/* Hero: two campaign photos side by side, the header floats over them. */}
       <section data-hero className="relative h-[85svh] min-h-[560px] overflow-hidden bg-ink text-white lg:h-[100svh]">
         <div className="absolute inset-0 grid md:grid-cols-2">
-          <div className="relative overflow-hidden">
-            <Image
-              src="/images/noor-embroidered.jpg"
-              alt="Model in the Noor embroidered black abaya"
-              fill
-              priority
-              quality={90}
-              sizes="(min-width: 768px) 50vw, 100vw"
-              className="hero-zoom object-cover object-[center_30%]"
-            />
-          </div>
-          <div className="relative hidden overflow-hidden md:block">
-            <Image src="/images/rack.jpg" alt="Satin abayas in royal blue, fuchsia and sand on Devon hangers" fill priority quality={90} sizes="50vw" className="hero-zoom object-cover" />
-          </div>
+          <video
+            className="h-full w-full object-cover"
+            src="/video/hero-1.mp4"
+            poster="/video/hero-1-poster.jpg"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            aria-label="Model in the Layal beaded abaya"
+          />
+          <video
+            className="hidden h-full w-full object-cover md:block"
+            src="/video/hero-2.mp4"
+            poster="/video/hero-2-poster.jpg"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-label="Model in the Sahar classic abaya"
+          />
         </div>
         <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-ink/40 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-ink/75 via-ink/30 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-ink/85 via-ink/45 to-transparent" />
         <div className="hero-rise absolute inset-x-0 bottom-[9%] flex flex-col items-center px-6 text-center">
           <p className="mb-3 font-serif text-[clamp(1.8rem,3.4vw,2.8rem)] italic leading-none">Luxury in each detail</p>
           <Link href="/shop" className="border-b border-white/80 pb-1 text-[15px] font-medium transition-colors hover:border-transparent">

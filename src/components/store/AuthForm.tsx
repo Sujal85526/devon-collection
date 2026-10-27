@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
+import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { cn } from "@/lib/utils";
 
 /** Password input with a show/hide eye toggle. */
@@ -65,6 +66,11 @@ export function AuthForm() {
 
     if (mode === "signup" && password !== f.get("confirm")?.toString()) {
       setConfirmError("Passwords don't match.");
+      return;
+    }
+
+    if (!isSupabaseConfigured) {
+      setMessage({ ok: false, text: "Accounts open very soon. Message us on WhatsApp for help with an order." });
       return;
     }
 

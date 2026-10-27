@@ -1,6 +1,7 @@
 "use server";
 
 import { z } from "zod";
+import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createClient } from "@/lib/supabase/server";
 
 const ReviewInput = z.object({
@@ -17,6 +18,7 @@ export type ReviewState = { ok: boolean; message: string } | null;
 export async function submitReview(_prev: ReviewState, formData: FormData): Promise<ReviewState> {
   const parsed = ReviewInput.safeParse(Object.fromEntries(formData));
   if (!parsed.success) return { ok: false, message: parsed.error.issues[0].message };
+  if (!isSupabaseConfigured) return { ok: false, message: "Reviews open very soon — thank you for your patience." };
 
   const supabase = await createClient();
   const {

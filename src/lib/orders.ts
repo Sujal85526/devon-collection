@@ -1,3 +1,4 @@
+import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createClient } from "@/lib/supabase/server";
 import type { Order, OrderEvent, OrderItem } from "@/lib/types";
 
@@ -5,6 +6,7 @@ export type TrackedOrder = { order: Order; items: OrderItem[]; events: OrderEven
 
 /** Looks up an order by number + email (guests), or by number alone when the signed-in customer owns it. */
 export async function findOrder(orderNumber: string, email?: string): Promise<TrackedOrder | null> {
+  if (!isSupabaseConfigured) return null;
   const supabase = await createClient();
   if (email) {
     const { data } = await supabase.rpc("track_order", { p_order_number: orderNumber, p_email: email });

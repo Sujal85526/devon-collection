@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { ArrowRight, LogOut, Package, Truck } from "lucide-react";
 import { ChangePassword } from "@/components/store/ChangePassword";
 import { getSession } from "@/lib/auth";
+import { isSupabaseConfigured } from "@/lib/supabase/env";
 import type { Order } from "@/lib/types";
 import { cn, formatDate, formatPrice, ORDER_STATUS_LABELS } from "@/lib/utils";
 import { signOut, updateProfile } from "./actions";
@@ -17,6 +18,7 @@ const statusTone = (s: string) =>
   s === "delivered" ? "bg-sage/25 text-[#4f6312]" : s === "cancelled" || s === "returned" ? "bg-ink/5 text-ink/60" : s === "shipped" || s === "out_for_delivery" ? "bg-rose/15 text-[#a8075f]" : "bg-alert/15 text-[#b4532a]";
 
 export default async function AccountPage() {
+  if (!isSupabaseConfigured) redirect("/account/login");
   const { supabase, user, profile } = await getSession();
   if (!user) redirect("/account/login");
   const { data } = await supabase

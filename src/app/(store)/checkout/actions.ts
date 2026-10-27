@@ -2,9 +2,11 @@
 
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
+import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createClient } from "@/lib/supabase/server";
 
 export async function checkCoupon(code: string, subtotal: number) {
+  if (!isSupabaseConfigured) return { valid: false, message: "Codes can't be checked right now." } as const;
   const supabase = await createClient();
   const { data, error } = await supabase.rpc("validate_coupon", { p_code: code, p_subtotal: subtotal });
   if (error || !data) return { valid: false, message: "Could not check this code right now." } as const;
@@ -37,6 +39,7 @@ export type PlaceOrderResult = { ok: true; orderNumber: string; email: string } 
 export async function placeOrder(input: z.input<typeof OrderInput>): Promise<PlaceOrderResult> {
   const parsed = OrderInput.safeParse(input);
   if (!parsed.success) return { ok: false, error: parsed.error.issues[0].message };
+  if (!isSupabaseConfigured) return { ok: false, error: "Online ordering opens very soon. In the meantime, message us on WhatsApp (+971 56 110 2881) to order." };
 
   const supabase = await createClient();
   const { data, error } = await supabase.rpc("place_order", {

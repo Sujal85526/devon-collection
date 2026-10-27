@@ -4,8 +4,9 @@
 @theme {
   --color-ink: #111010;
   --color-ink-deep: #000000;
-  --color-paper: #faf7f4;
-  --color-paper-light: #f3eee9;
+  --color-paper: #faf7f4; /* raised panels */
+  --color-paper-light: #f3eee9; /* the page itself */
+  --color-paper-deep: #e9e1d8;
   --color-rose: #de097f;
   --color-rose-deep: #a8075f;
   --color-blush: #f9e3ef;
@@ -14,68 +15,71 @@
   --color-muted: #77706b;
   --color-line: #e6dfd8;
 
-  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
-  /* Display headlines: the logo's high-contrast serif, set in italic for an editorial voice. */
-  --font-script: var(--font-playfair), ui-serif, Georgia, serif;
+  --font-sans: var(--font-instrument-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-script: var(--font-instrument-sans), ui-sans-serif, system-ui, sans-serif;
+  /* Italic accent word inside a headline. */
+  --font-accent: var(--font-instrument-serif), "Times New Roman", serif;
 
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @layer base {
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    scrollbar-gutter: stable;
+    background: var(--color-paper-light);
+    -webkit-tap-highlight-color: transparent;
+  }
   body {
-    @apply bg-paper text-ink font-sans antialiased;
-    font-variant-numeric: lining-nums;
+    @apply bg-paper-light text-ink font-sans antialiased;
+    text-rendering: optimizeLegibility;
   }
   ::selection { @apply bg-rose text-white; }
   :focus-visible { @apply outline-2 outline-offset-2 outline-rose; }
-  .font-script { font-style: italic; font-weight: 400; letter-spacing: -0.01em; }
+
+  /* Headlines: Instrument Sans medium, tight. An italic word inside switches to Instrument Serif. */
+  .font-script, .font-serif {
+    font-weight: 500;
+    letter-spacing: -0.035em;
+  }
+  .font-script em, .font-script .italic, .font-serif em, .font-serif .italic, .font-serif.italic {
+    font-family: var(--font-accent);
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: -0.01em;
+  }
+  .font-script em, .font-script .italic { color: var(--color-rose); }
 }
 
+/* Raised ivory panel on the cream page. */
+@utility panel {
+  @apply bg-paper rounded-[1.25rem];
+}
 @utility eyebrow {
-  @apply text-[10.5px] font-medium uppercase tracking-[0.32em];
+  @apply text-xs font-medium tracking-tight;
 }
 @utility btn {
-  @apply inline-flex items-center justify-center gap-3 px-8 py-4 text-[10.5px] font-semibold uppercase tracking-[0.28em] transition-all duration-300 ease-out-soft disabled:cursor-not-allowed disabled:opacity-50;
+  @apply inline-flex items-center justify-center gap-2.5 rounded-full px-7 py-3.5 text-xs font-medium uppercase tracking-[0.04em] transition-colors duration-300 disabled:cursor-not-allowed disabled:opacity-50;
 }
 @utility btn-primary { @apply btn bg-ink text-paper hover:bg-rose; }
-@utility btn-outline { @apply btn border border-ink text-ink hover:bg-ink hover:text-paper; }
-@utility btn-light { @apply btn border border-white/80 text-white hover:bg-white hover:text-ink; }
+@utility btn-outline { @apply btn border border-ink/25 text-ink hover:border-ink hover:bg-ink hover:text-paper; }
+@utility btn-light { @apply btn border border-white/70 text-white hover:bg-white hover:text-ink; }
 @utility link-arrow {
-  @apply inline-flex items-center gap-3 text-[10.5px] font-semibold uppercase tracking-[0.28em] transition-[gap,color] duration-300 hover:gap-5 hover:text-rose;
+  @apply inline-flex items-center gap-2 text-[13px] font-medium transition-[gap,color] duration-300 hover:gap-3 hover:text-rose;
 }
 @utility field {
-  @apply w-full border border-ink/15 bg-white px-4 py-3 text-base text-ink md:text-sm placeholder:text-muted/70 transition-colors focus:border-ink focus:outline-none;
+  @apply w-full rounded-xl border border-ink/12 bg-white px-4 py-3 text-base text-ink md:text-sm placeholder:text-muted/70 transition-colors focus:border-ink focus:outline-none;
 }
 @utility label {
-  @apply mb-1.5 block text-[10.5px] font-semibold uppercase tracking-[0.2em] text-ink/70;
+  @apply mb-1.5 block text-xs font-medium text-ink/70;
 }
 @utility checkout-input {
-  @apply h-12 w-full border border-ink/15 bg-white px-4 text-base text-ink placeholder:text-muted/60 transition-[border-color,box-shadow] duration-200 focus:border-ink focus:shadow-[0_0_0_3px_rgba(222,9,127,0.12)] focus:outline-none sm:text-sm;
+  @apply h-12 w-full rounded-xl border border-ink/12 bg-white px-4 text-base text-ink placeholder:text-muted/60 transition-[border-color,box-shadow] duration-200 focus:border-ink focus:shadow-[0_0_0_3px_rgba(222,9,127,0.12)] focus:outline-none sm:text-sm;
 }
 
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { scrollbar-width: none; }
-
-/* Store header: ivory bar with a hairline once the page scrolls. Over a photo hero ([data-hero])
-   it starts transparent with white type. */
-.site-header {
-  position: sticky;
-  background-color: var(--color-paper);
-  border-bottom: 1px solid transparent;
-  transition: background-color 0.4s var(--ease-out-soft), border-color 0.4s, color 0.4s;
-}
-.site-header[data-scrolled],
-.site-header[data-open] { border-bottom-color: var(--color-line); }
-body:has([data-hero]) .site-header { position: fixed; }
-body:has([data-hero]) .site-header:not([data-scrolled]):not([data-open]) {
-  background-color: transparent;
-  color: #fff;
-}
-.site-header .logo-light { display: none; }
-body:has([data-hero]) .site-header:not([data-scrolled]):not([data-open]) .logo-light { display: block; }
-body:has([data-hero]) .site-header:not([data-scrolled]):not([data-open]) .logo-dark { display: none; }
 
 /* Reveal on scroll (components/store/Reveal.tsx). Content is only hidden once the component has
    mounted and found itself below the fold, so nothing flashes before hydration or if JS is slow. */

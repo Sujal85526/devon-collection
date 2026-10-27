@@ -1,28 +1,11 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Instrument_Sans, Instrument_Serif } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
 
-// Playfair Display is the closest open match to the high-contrast serif of the Devon wordmark;
-// Montserrat carries the UI. Both self-hosted from src/fonts (Latin WOFF2 subsets).
-const playfair = localFont({
-  variable: "--font-playfair",
-  display: "swap",
-  src: [
-    { path: "../fonts/web/PlayfairDisplay-Variable.woff2", weight: "400 900", style: "normal" },
-    { path: "../fonts/web/PlayfairDisplay-Italic-Variable.woff2", weight: "400 900", style: "italic" },
-  ],
-});
-const montserrat = localFont({
-  variable: "--font-montserrat",
-  display: "swap",
-  src: [
-    { path: "../fonts/web/Montserrat-Regular.woff2", weight: "400", style: "normal" },
-    { path: "../fonts/web/Montserrat-Medium.woff2", weight: "500", style: "normal" },
-    { path: "../fonts/web/Montserrat-SemiBold.woff2", weight: "600", style: "normal" },
-    { path: "../fonts/web/Montserrat-Bold.woff2", weight: "700", style: "normal" },
-  ],
-});
+// Instrument Sans (medium, tight tracking) for everything; Instrument Serif italic for single accent words.
+const sans = Instrument_Sans({ variable: "--font-instrument-sans", subsets: ["latin"], weight: ["400", "500", "600"] });
+const serif = Instrument_Serif({ variable: "--font-instrument-serif", subsets: ["latin"], weight: "400", style: ["normal", "italic"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
@@ -43,13 +26,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${playfair.variable} ${montserrat.variable}`} suppressHydrationWarning>
-      <body className="min-h-screen">
+    <html lang="en" className={`${sans.variable} ${serif.variable}`} suppressHydrationWarning>
+      <body className="min-h-dvh">
         {children}
         <Toaster
           position="bottom-center"
           toastOptions={{
-            style: { background: "#111010", color: "#faf7f4", border: "none", borderRadius: 0, fontFamily: "var(--font-montserrat)" },
+            style: { background: "#111010", color: "#faf7f4", border: "none", borderRadius: 9999, fontFamily: "var(--font-instrument-sans)" },
           }}
         />
       </body>

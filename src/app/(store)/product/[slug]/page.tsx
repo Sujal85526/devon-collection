@@ -42,7 +42,7 @@ export default async function ProductPage(props: PageProps<"/product/[slug]">) {
   return (
     <>
       <div className="mx-auto max-w-[1440px] px-5 pb-20 pt-6 md:px-10 md:pt-10">
-        <nav className="mb-8 text-[10px] uppercase tracking-[0.22em] text-muted">
+        <nav className="mb-8 text-[10px] uppercase tracking-[0.04em] text-muted">
           <Link href="/shop" className="hover:text-ink">Shop</Link>
           {product.category && (
             <>
@@ -136,14 +136,14 @@ export default async function ProductPage(props: PageProps<"/product/[slug]">) {
             )}
             <ul className="mt-10 space-y-4">
               {reviews.map((r) => (
-                <li key={r.id} className="border border-line bg-white p-6">
+                <li key={r.id} className="rounded-2xl bg-paper p-6">
                   <div className="flex items-center justify-between">
                     <Stars rating={r.rating} />
                     <span className="text-[11px] text-muted">{formatDate(r.created_at)}</span>
                   </div>
                   {r.title && <p className="mt-3 font-medium">{r.title}</p>}
                   {r.body && <p className="mt-2 text-sm leading-relaxed text-ink/80">{r.body}</p>}
-                  <p className="mt-3 text-[11px] uppercase tracking-[0.2em] text-muted">{r.author_name}</p>
+                  <p className="mt-3 text-[11px] uppercase tracking-[0.04em] text-muted">{r.author_name}</p>
                   {r.admin_reply && (
                     <div className="mt-4 border-l-2 border-rose pl-4 text-sm text-ink/80">
                       <p className="eyebrow mb-1 text-[10px] text-rose">Devon Collection</p>
@@ -154,7 +154,7 @@ export default async function ProductPage(props: PageProps<"/product/[slug]">) {
               ))}
             </ul>
           </div>
-          <div className="h-fit border border-line bg-white p-6 md:p-8">
+          <div className="h-fit rounded-2xl bg-paper p-6 md:p-8">
             <h3 className="font-serif text-2xl">Write a review</h3>
             <p className="mb-6 mt-1 text-sm text-muted">Tell us how it fits and feels.</p>
             <ReviewForm productId={product.id} />

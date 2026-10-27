@@ -59,8 +59,8 @@ export default async function AccountPage() {
           ["In progress", String(open)],
           ["Total spent", formatPrice(spent)],
         ].map(([label, value]) => (
-          <div key={label} className="border border-line bg-white p-4 sm:p-6">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-ink/55">{label}</p>
+          <div key={label} className="rounded-2xl bg-paper p-4 sm:p-6">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.04em] text-ink/55">{label}</p>
             <p className="mt-3 font-serif text-2xl tabular-nums lining-nums sm:text-3xl">{value}</p>
           </div>
         ))}
@@ -70,7 +70,7 @@ export default async function AccountPage() {
         <section>
           <h2 className="mb-5 font-script text-5xl leading-none">Your orders</h2>
           {orders.length === 0 ? (
-            <div className="flex flex-col items-center gap-4 border border-line bg-white px-6 py-14 text-center">
+            <div className="flex flex-col items-center gap-4 rounded-2xl bg-paper px-6 py-14 text-center">
               <Package className="size-7 text-ink/40" strokeWidth={1.2} />
               <p className="font-serif text-xl italic">No orders yet</p>
               <Link href="/shop" className="btn-primary">
@@ -81,7 +81,7 @@ export default async function AccountPage() {
             <ul className="space-y-3">
               {orders.map((o) => (
                 <li key={o.id}>
-                  <Link href={`/order/${o.order_number}`} className="group flex items-center gap-4 border border-line bg-white p-4 transition-colors hover:bg-white sm:p-5">
+                  <Link href={`/order/${o.order_number}`} className="group flex items-center gap-4 rounded-2xl bg-paper p-4 transition-colors hover:bg-white sm:p-5">
                     <div className="flex -space-x-3">
                       {o.order_items.slice(0, 3).map((it, i) => (
                         <div key={i} className="relative size-12 overflow-hidden border-2 border-white bg-paper-light sm:size-14">
@@ -95,7 +95,7 @@ export default async function AccountPage() {
                         {formatDate(o.created_at)} · {o.order_items.reduce((s, i) => s + i.quantity, 0)} item(s)
                       </p>
                     </div>
-                    <span className={cn("hidden rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] sm:inline-block", statusTone(o.status))}>
+                    <span className={cn("hidden rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.04em] sm:inline-block", statusTone(o.status))}>
                       {ORDER_STATUS_LABELS[o.status]}
                     </span>
                     <span className="text-sm font-medium tabular-nums">{formatPrice(o.total)}</span>
@@ -111,7 +111,7 @@ export default async function AccountPage() {
         </section>
 
         <aside className="space-y-6">
-          <section className="border border-line bg-white p-6">
+          <section className="rounded-2xl bg-paper p-6">
             <h2 className="font-serif text-2xl">Your details</h2>
             <form action={updateProfile} className="mt-5 space-y-4">
               <label className="block">
@@ -125,7 +125,7 @@ export default async function AccountPage() {
               <button className="btn-primary w-full">Save details</button>
             </form>
           </section>
-          <section className="border border-line bg-white p-6">
+          <section className="rounded-2xl bg-paper p-6">
             <h2 className="font-serif text-2xl">Password</h2>
             <div className="mt-5">
               <ChangePassword />

@@ -17,7 +17,7 @@ export default async function TrackPage(props: PageProps<"/track">) {
         <h1 className="mt-6 font-script text-5xl leading-none md:text-7xl">Track your order</h1>
         <p className="mt-4 text-sm text-muted">Enter your order number and the email you used at checkout.</p>
       </header>
-      <form className="mx-auto mt-12 grid max-w-2xl gap-4 border border-line bg-white p-6 sm:grid-cols-[1fr_1.4fr_auto] sm:items-end md:p-8">
+      <form className="mx-auto mt-12 grid max-w-2xl gap-4 rounded-2xl bg-paper p-6 sm:grid-cols-[1fr_1.4fr_auto] sm:items-end md:p-8">
         <label>
           <span className="label">Order number</span>
           <input name="order" required defaultValue={order} placeholder="CR1001" className="field uppercase" />

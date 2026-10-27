@@ -115,7 +115,7 @@ export function AuthForm() {
               setConfirmError(undefined);
             }}
             className={cn(
-              "rounded-full py-2.5 text-[10px] font-semibold uppercase tracking-[0.22em] transition-colors",
+              "rounded-full py-2.5 text-[10px] font-semibold uppercase tracking-[0.04em] transition-colors",
               mode === m ? "bg-ink text-paper" : "text-ink/60 hover:text-ink",
             )}
           >

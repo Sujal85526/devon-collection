@@ -10,7 +10,7 @@ export default function AccountLoginPage() {
         <h1 className="mt-6 font-script text-5xl leading-none md:text-6xl">Welcome</h1>
         <p className="mt-5 text-sm text-muted">Sign in to see your orders and check out faster. You can always check out as a guest.</p>
       </header>
-      <div className="border border-line bg-white p-6 md:p-8">
+      <div className="rounded-2xl bg-paper p-6 md:p-8">
         <AuthForm />
       </div>
     </div>

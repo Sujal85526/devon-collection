@@ -72,7 +72,7 @@ export function OrderDetails({ data }: { data: TrackedOrder }) {
         </div>
       </div>
 
-      <aside className="h-fit border border-line bg-white p-7">
+      <aside className="h-fit rounded-2xl bg-paper p-7">
         <h2 className="eyebrow mb-6">Items</h2>
         <ul className="space-y-5">
           {items.map((item) => (
@@ -81,7 +81,7 @@ export function OrderDetails({ data }: { data: TrackedOrder }) {
                 {item.image_url && <Image src={item.image_url} alt={item.product_name} fill sizes="64px" className="object-cover" />}
               </div>
               <div className="min-w-0 flex-1">
-                <p className="truncate text-[11px] font-semibold uppercase tracking-[0.15em]">{item.product_name}</p>
+                <p className="truncate text-[11px] font-semibold uppercase tracking-[0.04em]">{item.product_name}</p>
                 <p className="mt-1 text-xs text-muted">
                   {[item.variant_label, `Qty ${item.quantity}`].filter(Boolean).join(" · ")}
                 </p>

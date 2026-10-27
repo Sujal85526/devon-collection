@@ -147,7 +147,7 @@ export function CheckoutForm({ shippingFlat, freeShippingThreshold, defaults }: 
           type="button"
           onClick={applyCoupon}
           disabled={checking || !couponInput.trim()}
-          className="h-12 shrink-0 border border-ink px-5 text-[11px] font-semibold uppercase tracking-[0.2em] transition-colors hover:bg-ink hover:text-paper disabled:border-ink/20 disabled:text-ink/40 disabled:hover:bg-transparent"
+          className="h-12 shrink-0 border border-ink px-5 text-[11px] font-semibold uppercase tracking-[0.04em] transition-colors hover:bg-ink hover:text-paper disabled:border-ink/20 disabled:text-ink/40 disabled:hover:bg-transparent"
         >
           {checking ? "…" : "Apply"}
         </button>
@@ -165,7 +165,7 @@ export function CheckoutForm({ shippingFlat, freeShippingThreshold, defaults }: 
         <div className="flex items-center justify-between">
           <dt className="flex items-center gap-2 text-ink/70">
             Discount
-            <span className="inline-flex items-center gap-1.5 bg-rose/12 px-2 py-0.5 text-[10px] font-semibold tracking-[0.15em] text-[#a8075f]">
+            <span className="inline-flex items-center gap-1.5 bg-rose/12 px-2 py-0.5 text-[10px] font-semibold tracking-[0.04em] text-[#a8075f]">
               {coupon.code}
               <button type="button" aria-label="Remove code" className="text-[#a8075f]/70 hover:text-[#a8075f]" onClick={() => setCoupon(null)}>
                 ×
@@ -202,7 +202,7 @@ export function CheckoutForm({ shippingFlat, freeShippingThreshold, defaults }: 
   return (
     <form onSubmit={onSubmit} className="mt-8 grid gap-8 lg:mt-12 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-14">
       {/* Mobile: collapsible order summary */}
-      <div className="overflow-hidden border border-line bg-white lg:hidden">
+      <div className="overflow-hidden rounded-2xl bg-paper lg:hidden">
         <button
           type="button"
           onClick={() => setSummaryOpen((v) => !v)}
@@ -278,7 +278,7 @@ export function CheckoutForm({ shippingFlat, freeShippingThreshold, defaults }: 
             <span className="flex-1">
               <span className="flex items-center justify-between gap-3">
                 <span className="text-sm font-semibold">Cash on delivery</span>
-                <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted">Cash or card</span>
+                <span className="text-[10px] font-semibold uppercase tracking-[0.04em] text-muted">Cash or card</span>
               </span>
               <span className="mt-1 block text-xs leading-relaxed text-muted">Pay the courier when your order arrives.</span>
             </span>
